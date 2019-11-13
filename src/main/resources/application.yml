@@ -8,7 +8,7 @@ spring:
       # 数据库访问配置, 使用druid数据源 
       db-type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url : jdbc:mysql://localhost:3306/mrbird?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+      url : jdbc:mysql://localhost:3306/wine?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
       username: root
       password: root
       # 连接池配置

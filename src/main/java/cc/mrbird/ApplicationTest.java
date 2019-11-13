@@ -1,15 +1,11 @@
 package cc.mrbird;
 
-import org.jasypt.util.text.BasicTextEncryptor;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+// @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 public class ApplicationTest {
 
@@ -24,7 +20,7 @@ public class ApplicationTest {
     @Value("${spring.datasource.druid.password}")
     private String datasourcePassword;
 
-    @Test
+   /* @Test
     public void test() {
         BasicTextEncryptor encryptor = new BasicTextEncryptor();
         encryptor.setPassword(encryptorPassword);
@@ -33,5 +29,5 @@ public class ApplicationTest {
 
         log.info("数据库用户名加密结果：{}", encryptedDatasourceUsername);
         log.info("数据库密码加密结果：{}", encryptedDatasourcePassword);
-    }
+    }*/
 }

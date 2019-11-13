@@ -1,14 +1,13 @@
 package cc.mrbird.system.domain;
 
-import java.io.Serializable;
+import cc.mrbird.common.annotation.ExportConfig;
+import com.google.common.base.MoreObjects;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import cc.mrbird.common.annotation.ExportConfig;
-import com.google.common.base.MoreObjects;
+import java.io.Serializable;
 
 @Table(name = "t_dict")
 public class Dict implements Serializable{
@@ -36,6 +35,17 @@ public class Dict implements Serializable{
 	@Column(name = "FIELD_NAME")
 	@ExportConfig(value = "列名")
 	private String fieldName;
+
+	/**
+	 * 商品货号
+	 */
+	private String articleNo;
+
+	/**
+	 * 商品名称
+	 */
+	private String goodsName;
+
 
 	/**
 	 * @return DICT_ID

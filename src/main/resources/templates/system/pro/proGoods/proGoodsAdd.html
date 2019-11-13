@@ -1,0 +1,60 @@
+<div class="modal fade" id="proGoods-add" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="proGoods-add-modal-title">新增商品</h3>
+            </div>
+            <div class="modal-body">
+                <form id="proGoods-add-form">
+                    <form action="imageUpload" method="post" enctype="multipart/form-data">
+                        <!-- <input type="file" name="fileName" id="filename" accept="image/png, image/jpeg, image/jpg" onchange="checkImage()">
+                         --><input type="file" name="fileName" id="filename"accept="image/png, image/jpeg, image/jpg, image/png, image/gif, image/bmp" onchange="checkImage()" >
+                        <input type="button" id="submitBtn" onclick="checkSubmit()" value="上传"/>
+                    </form>
+                   <!-- <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	值：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="valuee" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	表名：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="tableName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	字段：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="fieldName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="proGoods-add-button" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/system/pro/proGoods/proGoodsAdd.js}"></script>

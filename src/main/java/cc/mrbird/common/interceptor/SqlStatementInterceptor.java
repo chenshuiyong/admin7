@@ -63,8 +63,8 @@ public class SqlStatementInterceptor implements Interceptor {
     private void printSql(Configuration configuration, BoundSql boundSql, String sqlId, long time) {
         String sql = showSql(configuration, boundSql);
         logger.info("【SQL语句Id】>>>> {}", sqlId);
-        logger.info("【SQL语句耗时】>>>> {} ms", time);
-        logger.info("【SQL语句】>>>> {}", sql);
+       /* logger.info("【SQL语句耗时】>>>> {} ms", time);
+        logger.info("【SQL语句】>>>> {}", sql);*/
     }
 
     private static String getParameterValue(Object obj) {

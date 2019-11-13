@@ -1,24 +1,103 @@
 package cc.mrbird.system.controller;
 
+import cc.mrbird.common.http.Response;
+import cc.mrbird.common.http.model.DefaultPutRet;
+import cc.mrbird.common.qiniu.QiniuException;
+import cc.mrbird.common.qiniu.Zone;
+import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.common.util.qiniu.Auth;
+import cc.mrbird.common.util.qiniu.Configuration;
+import cc.mrbird.common.util.qiniu.UploadManager;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import org.springframework.stereotype.Controller;
+import com.google.gson.Gson;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @RestController
 public class ImageUploadController {
 
+  /**
+   * @description 上传文件
+   * @param request 请求
+   * @param response 响应
+   * @throws IOException 异常
+   */
+  @RequestMapping("/fileUpload")
+  public void fileUpload(HttpServletRequest request,@RequestParam("fileName") MultipartFile multipartFile, HttpServletResponse response) throws IOException {
+    Map<String, Object> result = new HashMap<>();
+    try {
+      String name = request.getParameter("name");
+      //MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+     // MultipartFile multipartFile = multipartRequest.getFile(name);
+     /* if (multipartFile == null) {
+        multipartFile = multipartRequest.getFile("upfile");
+      }
+      if (multipartFile == null) {
+        return;
+      }*/
+      String originalName = multipartFile.getOriginalFilename();
+      String fileExt = originalName.substring(originalName.lastIndexOf("."));
+      result.put("name", multipartFile.getName());
+      result.put("originalName", originalName);
+      result.put("size", multipartFile.getSize());
+      result.put("state", "SUCCESS");
+      result.put("type", fileExt);
+      try {
+       // byte[] uploadBytes = "hello qiniu cloud".getBytes("utf-8");
+        Auth auth = Auth.create(Constant.AccessKey, Constant.SecretKey);
+        String upToken = auth.uploadToken(Constant.bucket);
+        try {
+          //创建上传对象
+          Zone z = Zone.autoZone();
+          Configuration c = new Configuration(z);
+          UploadManager uploadManager = new UploadManager(c);
+          Response r = uploadManager.put(FileCopyUtils.copyToByteArray(multipartFile.getInputStream()), null, upToken);
+          //解析上传成功的结果
+          DefaultPutRet putRet = new Gson().fromJson(r.bodyString(), DefaultPutRet.class);
+          System.out.println(putRet.key);
+          System.out.println(putRet.hash);
+        } catch (QiniuException ex) {
+          Response r = ex.response;
+          System.err.println(r.toString());
+          try {
+            System.err.println(r.bodyString());
+          } catch (QiniuException ex2) {
+            //ignore
+          }
+        }
+      } catch (UnsupportedEncodingException ex) {
+        //ignore
+      }
+    }catch (Exception e) {
+      result.put("state", e.getMessage());
+    }
+  }
+    /*  String url = wantuService.uploadFile(Sessions.getCurrentSessionId(),
+              FileCopyUtils.copyToByteArray(multipartFile.getInputStream()));
+      result.put("url", url);
+    } catch (Exception e) {
+      result.put("state", e.getMessage());
+    }*/
+ /*   response.setHeader("Content-Type", "text/html");
+    String callback = request.getParameter("callback");
+    String json = Constant.OBJECT_MAPPAER.writeValueAsString(result);
+    if (callback == null) {
+      response.getWriter().print(json);
+    } else {
+      response.getWriter().print("<script>" + callback + "(" + json + ")</script>");
+    }
+  }*/
   /**
    * 普通上传 对应html:index.html url:localhost:8080/index.html ajax上传 对应html:ajaxIndex.html
    * url:localhost:8080/ajaxIndex.html

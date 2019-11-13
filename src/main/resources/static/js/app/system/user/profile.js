@@ -196,7 +196,7 @@ function checkSubmit() {
     $.ajax({
         async: false,
         type: 'POST',
-        url: "/imageUpload",
+        url: "/fileUpload",
         dataType: 'json',
         data: formdata,
         contentType: false,//ajax上传图片需要添加

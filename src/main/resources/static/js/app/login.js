@@ -35,15 +35,15 @@ $(document).ready(function () {
 });
 
 
-function reloadCode() {
+/*function reloadCode() {
     $("#validateCodeImg").attr("src", ctx + "gifCode?data=" + new Date() + "");
-}
+}*/
 
 function login() {
     var $loginButton = $("#loginButton");
     var username = $(".one input[name='username']").val().trim();
     var password = $(".one input[name='password']").val().trim();
-    var code = $(".one input[name='code']").val().trim();
+   /* var code = $(".one input[name='code']").val().trim();*/
     var rememberMe = $(".one input[name='rememberme']").is(':checked');
     if (username === "") {
         $MB.n_warning("请输入用户名！");
@@ -51,10 +51,6 @@ function login() {
     }
     if (password === "") {
         $MB.n_warning("请输入密码！");
-        return;
-    }
-    if (code === "") {
-        $MB.n_warning("请输入验证码！");
         return;
     }
     $loginButton.html("").append("<div class='login-loder'><div class='line-scale'><div></div><div></div><div></div><div></div><div></div></div></div>");
@@ -65,7 +61,6 @@ function login() {
         data: {
             "username": username,
             "password": password,
-            "code": code,
             "rememberMe": rememberMe
         },
         dataType: "json",
@@ -73,7 +68,6 @@ function login() {
             if (r.code === 0) {
                 location.href = ctx + 'index';
             } else {
-                reloadCode();
                 $MB.n_warning(r.msg);
                 $loginButton.html("登录");
             }
