@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.pro.ProGoodsMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.pro.ProGoods">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="article_no" jdbcType="VARCHAR" property="articleNo" />
+    <result column="inventory_num" jdbcType="INTEGER" property="inventoryNum" />
+    <result column="min_weight" jdbcType="VARCHAR" property="minWeight" />
+    <result column="max_weight" jdbcType="VARCHAR" property="maxWeight" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+</mapper>
